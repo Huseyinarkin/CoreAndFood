@@ -24,6 +24,10 @@ namespace CoreAndFood.Controllers
         [HttpPost]
         public IActionResult CategoryAdd(Category p)
         {
+            if(!ModelState.IsValid)
+            {
+                return View();                
+            }
             categoryRepository.TAdd(p);
             return RedirectToAction("Index");
         }
