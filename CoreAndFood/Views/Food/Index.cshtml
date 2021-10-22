@@ -1,0 +1,37 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<CoreAndFood.Models.Food>
+@{
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+<h2>Category List</h2>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Food Name</th>
+        <th>Category Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Details</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FoodID</td>
+            <td>@item.Name</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.Price</td>
+            <td>@item.Stock</td>
+            <td><a href="#" class="btn btn-danger">Delete</a></td>
+            <td><a href="#" class="btn btn-success">Update</a></td>
+            <td><a href="#" class="btn btn-info">Details</a></td>
+        </tr>
+
+    }
+</table>
+<a href="#" class="btn btn-primary">New Food</a>
