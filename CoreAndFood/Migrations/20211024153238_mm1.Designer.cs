@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoreAndFood.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20211022125059_mig1")]
-    partial class mig1
+    [Migration("20211024153238_mm1")]
+    partial class mm1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,7 +31,9 @@ namespace CoreAndFood.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("CategoryID");
 
