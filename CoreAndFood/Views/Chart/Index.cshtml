@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+}
+
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+
+
+    <script type="text/javascript">
+                console.log("calisti");
+                val1 = "5";
+                val2 = "2";
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("VisualizeProductResult")",
+                    dataType: "json",
+                    success: function (result) {
+                        google.charts.load("current", { packages: ["corechart"] });
+                        google.charts.setOnLoadCallback(function () {
+                            drawChart(result);
+                        });
+
+                    },
+
+                });
+
+
+
+            function drawChart(result) {
+
+                var dataArray = [];
+
+                $.each(result, function (i, obj) {
+                    dataArray.push([obj.foodName, obj.stock]);
+                });
+                console.log(dataArray);
+
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'proname');
+                data.addColumn('number', 'stock');
+                data.addRows(dataArray);
+
+                var options = {
+                    title: "Food - Stock Dynamic Chart",
+                    height: 500,
+                    bar: { groupWidth: "20%" },
+                    is3D: true,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('Piechart_div'));
+                chart.draw(data, options);
+                var chart = new google.visualization.ColumnChart(document.getElementById('Piechart_div1'));
+                chart.draw(data, options);
+            }
+    </script>
+</head>
+<body>
+    <br />    
+    <div >
+        <div class="row">
+            <div id="Piechart_div" class="col"></div>
+            <div id="Piechart_div1" class="col"></div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
