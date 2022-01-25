@@ -10,10 +10,24 @@ namespace CoreAndFood.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-PETA9I9;Database=DbCoreFood;Integrated Security=true;");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=DbCoreFood;MultipleActiveResultSets=True");
         }
+        
         public DbSet<Category> Categories { get; set; }
         public DbSet<Food> Foods { get; set; }
         public DbSet<Admin> Admins { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Admin>().HasData(
+                    new Admin
+                    {
+                        ID = 1,
+                        UserName = "a",
+                        PAssword = "a",
+                        Role = "1"
+                    }
+                );
+        }
     }
 }
